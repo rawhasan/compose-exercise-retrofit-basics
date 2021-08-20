@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -24,6 +25,7 @@ import coil.compose.rememberImagePainter
 import com.example.retrifitbasics.MarsApiStatus
 import com.example.retrifitbasics.OverviewViewModel
 import com.example.retrifitbasics.R
+import com.example.retrifitbasics.network.MarsApiFilter
 import com.example.retrifitbasics.network.MarsProperty
 
 @ExperimentalFoundationApi
@@ -39,6 +41,18 @@ fun HomeScreen(overviewViewModel: OverviewViewModel = viewModel()) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.padding(bottom = 16.dp)
+        ) {
+            Button(onClick = { overviewViewModel.updateFilter(MarsApiFilter.SHOW_ALL) }) { Text("Show All") }
+            Button(
+                onClick = { overviewViewModel.updateFilter(MarsApiFilter.SHOW_BUY) },
+                modifier = Modifier.padding(horizontal = 16.dp)
+            ) { Text("For Sell") }
+            Button(onClick = { overviewViewModel.updateFilter(MarsApiFilter.SHOW_RENT) }) { Text("For Rent") }
+        }
+
         when (status) {
             MarsApiStatus.DONE -> {
                 // TODO: Change the grid cell width to 50% of the screen width
