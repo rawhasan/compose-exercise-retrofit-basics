@@ -1,7 +1,15 @@
-# Compose Exercise: Retrifit Basics
-Retrofit with Jetpack Compose basics.
+# Compose Exercise: Retrofit Basics
+- Call an external API using the Retrofit library and get the returned JSON.
+- Handle loading/error/done status of the API call.
+- Convert JSON to Kotlin object by the Moshi library.
+- Display images from remote URLs by the Coil library.
+- Replace part of a string with a new value.
 
 ## Dependencies
+```
+<uses-permission android:name="android.permission.INTERNET" />
+```
+
 ```
 // Moshi
 implementation "com.squareup.moshi:moshi-kotlin:1.12.0"
