@@ -4,6 +4,7 @@
 - Convert JSON to Kotlin object by the Moshi library.
 - Display images from remote URLs by the Coil library.
 - Replace part of a string with a new value.
+- Custom property on a data class.
 
 ## Dependencies
 ```

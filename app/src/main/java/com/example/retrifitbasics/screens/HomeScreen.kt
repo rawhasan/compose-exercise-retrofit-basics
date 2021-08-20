@@ -6,13 +6,17 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -59,7 +63,7 @@ fun HomeScreen(overviewViewModel: OverviewViewModel = viewModel()) {
                 Image(
                     painter = rememberImagePainter(data = R.drawable.ic_connection_error),
                     contentDescription = "Connection Error",
-                    modifier = Modifier.fillMaxSize(0.8f)
+                    modifier = Modifier.fillMaxSize(0.5f)
                 )
 
                 Text(
@@ -83,7 +87,10 @@ private fun MarsPhotoGridLayout(property: MarsProperty) {
             "https://mars.nasa.gov"
         )
 
-    Row(modifier = Modifier.padding(4.dp)) {
+    Box(
+        modifier = Modifier.padding(4.dp),
+        contentAlignment = Alignment.BottomEnd
+    ) {
         Image(
             painter = rememberImagePainter(
                 data = redirectedImgSrcUrl,
@@ -96,5 +103,16 @@ private fun MarsPhotoGridLayout(property: MarsProperty) {
             modifier = Modifier.height(120.dp),
             contentScale = ContentScale.Crop
         )
+
+        if (!property.isRental) {
+            Icon(
+                imageVector = Icons.Filled.ShoppingCart,
+                contentDescription = "Available for sell",
+                tint = Color.White,
+                modifier = Modifier
+                    .padding(8.dp)
+                    .size(16.dp)
+            )
+        }
     }
 }
