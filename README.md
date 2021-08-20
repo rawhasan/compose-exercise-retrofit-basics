@@ -2,8 +2,8 @@
 - Call an external API using the Retrofit library and get the returned JSON.
 - Handle loading/error/done status of the API call.
 - Use query to filter the results of the API call.
-- Convert JSON to Kotlin object by the Moshi library.
-- Display images from remote URLs by the Coil library.
+- Convert JSON to Kotlin object using the Moshi library.
+- Display images from remote URLs using the Coil library.
 - Replace part of a string with a new value.
 - Custom property on a data class.
 
@@ -28,4 +28,7 @@ implementation "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
 
 // Compose LiveData
 implementation "androidx.compose.runtime:runtime-livedata:1.0.1"
+
+// Compose Navigation
+implementation "androidx.navigation:navigation-compose:2.4.0-alpha06"
 ```

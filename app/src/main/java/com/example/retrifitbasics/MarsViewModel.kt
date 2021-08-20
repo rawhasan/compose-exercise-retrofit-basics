@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 enum class MarsApiStatus { LOADING, ERROR, DONE }
 
-class OverviewViewModel : ViewModel() {
+class MarsViewModel : ViewModel() {
     private val _status = MutableLiveData<MarsApiStatus>()
     val status: LiveData<MarsApiStatus>
         get() = _status

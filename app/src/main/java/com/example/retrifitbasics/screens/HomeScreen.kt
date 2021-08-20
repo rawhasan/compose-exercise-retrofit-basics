@@ -2,6 +2,7 @@ package com.example.retrifitbasics.screens
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
@@ -13,26 +14,37 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.example.retrifitbasics.MarsApiStatus
-import com.example.retrifitbasics.OverviewViewModel
+import com.example.retrifitbasics.MarsViewModel
 import com.example.retrifitbasics.R
 import com.example.retrifitbasics.network.MarsApiFilter
 import com.example.retrifitbasics.network.MarsProperty
 
 @ExperimentalFoundationApi
 @Composable
-fun HomeScreen(overviewViewModel: OverviewViewModel = viewModel()) {
-    val status by overviewViewModel.status.observeAsState(MarsApiStatus.ERROR)
-    val properties by overviewViewModel.properties.observeAsState(listOf())
+fun HomeScreen(
+    navController: NavController,
+    marsViewModel: MarsViewModel,
+    onSetTitle: (String) -> Unit
+) {
+    val appTitle = stringResource(id = R.string.app_name)
+    val status by marsViewModel.status.observeAsState(MarsApiStatus.ERROR)
+    val properties by marsViewModel.properties.observeAsState(listOf())
+
+    LaunchedEffect(Unit) {
+        onSetTitle(appTitle)
+    }
 
     Column(
         modifier = Modifier
@@ -45,12 +57,12 @@ fun HomeScreen(overviewViewModel: OverviewViewModel = viewModel()) {
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier.padding(bottom = 16.dp)
         ) {
-            Button(onClick = { overviewViewModel.updateFilter(MarsApiFilter.SHOW_ALL) }) { Text("Show All") }
+            Button(onClick = { marsViewModel.updateFilter(MarsApiFilter.SHOW_ALL) }) { Text("Show All") }
             Button(
-                onClick = { overviewViewModel.updateFilter(MarsApiFilter.SHOW_BUY) },
+                onClick = { marsViewModel.updateFilter(MarsApiFilter.SHOW_BUY) },
                 modifier = Modifier.padding(horizontal = 16.dp)
             ) { Text("For Sell") }
-            Button(onClick = { overviewViewModel.updateFilter(MarsApiFilter.SHOW_RENT) }) { Text("For Rent") }
+            Button(onClick = { marsViewModel.updateFilter(MarsApiFilter.SHOW_RENT) }) { Text("For Rent") }
         }
 
         when (status) {
@@ -60,7 +72,10 @@ fun HomeScreen(overviewViewModel: OverviewViewModel = viewModel()) {
                     cells = GridCells.Adaptive(minSize = 140.dp)
                 ) {
                     items(properties) { property ->
-                        MarsPhotoGridLayout(property)
+                        MarsPhotoGridLayout(
+                            property,
+                            onPhotoClicked = { navController.navigate("details/${it.id}") }
+                        )
                     }
                 }
             }
@@ -91,7 +106,7 @@ fun HomeScreen(overviewViewModel: OverviewViewModel = viewModel()) {
 }
 
 @Composable
-private fun MarsPhotoGridLayout(property: MarsProperty) {
+private fun MarsPhotoGridLayout(property: MarsProperty, onPhotoClicked: (MarsProperty) -> Unit) {
 
     // URL of the image at the endpoint is getting redirected,
     // so fixed the URL before showing the image. Otherwise, mo image is shown.
@@ -102,7 +117,9 @@ private fun MarsPhotoGridLayout(property: MarsProperty) {
         )
 
     Box(
-        modifier = Modifier.padding(4.dp),
+        modifier = Modifier
+            .padding(4.dp)
+            .clickable { onPhotoClicked(property) },
         contentAlignment = Alignment.BottomEnd
     ) {
         Image(
