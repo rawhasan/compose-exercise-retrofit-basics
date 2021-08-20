@@ -6,7 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -71,10 +71,10 @@ fun HomeScreen(
                 LazyVerticalGrid(
                     cells = GridCells.Adaptive(minSize = 140.dp)
                 ) {
-                    items(properties) { property ->
+                    itemsIndexed(properties) { index, property ->
                         MarsPhotoGridLayout(
                             property,
-                            onPhotoClicked = { navController.navigate("details/${it.id}") }
+                            onPhotoClicked = { navController.navigate("details/$index") }
                         )
                     }
                 }
@@ -106,7 +106,12 @@ fun HomeScreen(
 }
 
 @Composable
-private fun MarsPhotoGridLayout(property: MarsProperty, onPhotoClicked: (MarsProperty) -> Unit) {
+private fun MarsPhotoGridLayout(
+    property: MarsProperty,
+    onPhotoClicked: () -> Unit
+) {
+
+    // TODO: Implement the URL redirection in the view model
 
     // URL of the image at the endpoint is getting redirected,
     // so fixed the URL before showing the image. Otherwise, mo image is shown.
@@ -119,7 +124,7 @@ private fun MarsPhotoGridLayout(property: MarsProperty, onPhotoClicked: (MarsPro
     Box(
         modifier = Modifier
             .padding(4.dp)
-            .clickable { onPhotoClicked(property) },
+            .clickable { onPhotoClicked() },
         contentAlignment = Alignment.BottomEnd
     ) {
         Image(
@@ -130,7 +135,7 @@ private fun MarsPhotoGridLayout(property: MarsProperty, onPhotoClicked: (MarsPro
                     error(R.drawable.ic_broken_image)
                 }
             ),
-            contentDescription = property.id,
+            contentDescription = null,
             modifier = Modifier.height(120.dp),
             contentScale = ContentScale.Crop
         )

@@ -40,4 +40,8 @@ class MarsViewModel : ViewModel() {
     fun updateFilter(filter: MarsApiFilter) {
         getMarsRealEstateProperties(filter)
     }
+
+    fun getProperty(propertyIndex: Int): MarsProperty? {
+        return _properties.value!![propertyIndex]
+    }
 }
