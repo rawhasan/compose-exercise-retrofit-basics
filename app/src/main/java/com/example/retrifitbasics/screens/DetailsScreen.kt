@@ -1,24 +1,39 @@
 package com.example.retrifitbasics.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.example.retrifitbasics.MarsViewModel
+import java.text.NumberFormat
+import java.util.*
 
 @Composable
 fun DetailsScreen(
     propertyIndex: String?,
-    navController: NavController,
     marsViewModel: MarsViewModel
 ) {
 
     val property = marsViewModel.getProperty(propertyIndex?.toInt() ?: 0)
+
+    // currency format from number
+    val format = NumberFormat.getCurrencyInstance(Locale.US)
+    val formattedPrice = format.format(property?.price)
+
+    // get color from hex code
+    val marsColor = Color(android.graphics.Color.parseColor("#9a7d55"))
+
+    val propertyType = property?.type
+        ?.replace("buy", "Sell")
+        ?.replace("rent", "Rent")
 
     // TODO: Implement the URL redirection in the view model
 
@@ -46,7 +61,20 @@ fun DetailsScreen(
                 .fillMaxHeight(0.5f)
         )
         Text("Property id: ${property?.id}")
-        Text("$ ${property?.price}")
-        Text("For ${property?.type?.capitalize()}")
+        Text(
+            formattedPrice,
+            style = MaterialTheme.typography.h4,
+            fontWeight = FontWeight.Bold,
+            color = marsColor
+        )
+        Text(
+            "For $propertyType",
+            style = MaterialTheme.typography.h6,
+            modifier = Modifier
+                .padding(top = 8.dp)
+                .background(marsColor)
+                .padding(horizontal = 16.dp, vertical = 4.dp),
+            color = Color.White
+        )
     }
 }

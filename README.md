@@ -6,6 +6,8 @@
 - Display images from remote URLs using the Coil library.
 - Replace part of a string with a new value.
 - Custom property on a data class.
+- Currency format from number.
+- Get color from hex code.
 
 ## Dependencies
 ```

@@ -62,7 +62,6 @@ fun RetrofitBasicsApp(marsViewModel: MarsViewModel) {
                 composable("details/{propertyId}") { backStackEntry ->
                     DetailsScreen(
                         backStackEntry.arguments?.getString("propertyId"),
-                        navController,
                         marsViewModel
                     )
                 }
