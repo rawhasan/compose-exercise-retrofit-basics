@@ -53,18 +53,6 @@ fun HomeScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-//        Row(
-//            horizontalArrangement = Arrangement.Center,
-//            modifier = Modifier.padding(bottom = 16.dp)
-//        ) {
-//            Button(onClick = { marsViewModel.updateFilter(MarsApiFilter.SHOW_ALL) }) { Text("Show All") }
-//            Button(
-//                onClick = { marsViewModel.updateFilter(MarsApiFilter.SHOW_BUY) },
-//                modifier = Modifier.padding(horizontal = 16.dp)
-//            ) { Text("For Sell") }
-//            Button(onClick = { marsViewModel.updateFilter(MarsApiFilter.SHOW_RENT) }) { Text("For Rent") }
-//        }
-
         when (status) {
             MarsApiStatus.DONE -> {
                 // TODO: Change the grid cell width to 50% of the screen width

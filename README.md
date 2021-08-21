@@ -8,6 +8,7 @@
 - Custom property on a data class.
 - Currency format from number.
 - Get color from hex code.
+- Dropdown menu on TopAppBar (options menu).
 
 ## Dependencies
 ```
