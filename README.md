@@ -38,3 +38,9 @@ implementation "androidx.compose.runtime:runtime-livedata:1.0.1"
 // Compose Navigation
 implementation "androidx.navigation:navigation-compose:2.4.0-alpha06"
 ```
+
+<br />
+
+|Property Listing|Property Details|
+|:---:|:---:|
+|![home](https://user-images.githubusercontent.com/67064997/130318548-b76396d4-b792-4b66-9e7c-663f95e5e059.png)|![details](https://user-images.githubusercontent.com/67064997/130318552-70340799-a2d4-4c54-a922-bac9ac3fb5a4.png)|
