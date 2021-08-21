@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -19,8 +20,12 @@ import java.util.*
 @Composable
 fun DetailsScreen(
     propertyIndex: String?,
-    marsViewModel: MarsViewModel
+    marsViewModel: MarsViewModel,
+    onShowDropdownMenu: (Boolean) -> Unit
 ) {
+    LaunchedEffect(Unit) {
+        onShowDropdownMenu(false)
+    }
 
     val property = marsViewModel.getProperty(propertyIndex?.toInt() ?: 0)
 
@@ -69,7 +74,7 @@ fun DetailsScreen(
         )
         Text(
             "For $propertyType",
-            style = MaterialTheme.typography.h6,
+            style = MaterialTheme.typography.subtitle1,
             modifier = Modifier
                 .padding(top = 8.dp)
                 .background(marsColor)
