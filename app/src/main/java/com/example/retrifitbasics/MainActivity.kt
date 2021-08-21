@@ -113,6 +113,7 @@ fun RetrofitBasicsApp(marsViewModel: MarsViewModel) {
                     DetailsScreen(
                         backStackEntry.arguments?.getString("propertyId"),
                         marsViewModel,
+                        onSetTitle = { appTitle = it },
                         onShowDropdownMenu = { showDropdownMenu = it }
                     )
                 }

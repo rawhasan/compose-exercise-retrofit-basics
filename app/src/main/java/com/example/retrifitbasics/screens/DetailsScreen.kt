@@ -22,13 +22,15 @@ import java.util.*
 fun DetailsScreen(
     propertyIndex: String?,
     marsViewModel: MarsViewModel,
+    onSetTitle: (String) -> Unit,
     onShowDropdownMenu: (Boolean) -> Unit
 ) {
+    val property = marsViewModel.getProperty(propertyIndex?.toInt() ?: 0)
+
     LaunchedEffect(Unit) {
+        onSetTitle("Property # ${property?.id}")
         onShowDropdownMenu(false)
     }
-
-    val property = marsViewModel.getProperty(propertyIndex?.toInt() ?: 0)
 
     // currency format from number
     val format = NumberFormat.getCurrencyInstance(Locale.US)
