@@ -11,7 +11,7 @@
 - Dropdown menu on TopAppBar (options menu).
 
 ## Reference
-This is the Compose version of the codelabs [Getting data from the internet](https://codelabs.developers.google.com/codelabs/kotlin-android-training-internet-data/), [Loading and displaying images from the internet](https://codelabs.developers.google.com/codelabs/kotlin-android-training-internet-images/), and [Filtering and detail views with internet data](https://codelabs.developers.google.com/codelabs/kotlin-android-training-internet-filtering/index.html) from the [Android Kotlin Fundamentals course](https://developer.android.com/courses/kotlin-android-fundamentals/toc).
+This is the Compose version of the codelabs [Getting data from the internet](https://codelabs.developers.google.com/codelabs/kotlin-android-training-internet-data/), [Loading and displaying images from the internet](https://codelabs.developers.google.com/codelabs/kotlin-android-training-internet-images/), and [Filtering and detail views with internet data](https://codelabs.developers.google.com/codelabs/kotlin-android-training-internet-filtering/) from the [Android Kotlin Fundamentals course](https://developer.android.com/courses/kotlin-android-fundamentals/toc).
 
 ## Dependencies
 ```

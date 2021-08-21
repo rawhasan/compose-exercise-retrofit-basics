@@ -28,6 +28,7 @@ import com.example.retrifitbasics.MarsApiStatus
 import com.example.retrifitbasics.MarsViewModel
 import com.example.retrifitbasics.R
 import com.example.retrifitbasics.network.MarsProperty
+import com.example.retrifitbasics.redirectedImgSrcUrl
 
 @ExperimentalFoundationApi
 @Composable
@@ -98,17 +99,6 @@ private fun MarsPhotoGridLayout(
     property: MarsProperty,
     onPhotoClicked: () -> Unit
 ) {
-
-    // TODO: Implement the URL redirection in the view model
-
-    // URL of the image at the endpoint is getting redirected,
-    // so fixed the URL before showing the image. Otherwise, mo image is shown.
-    val redirectedImgSrcUrl =
-        property.imgSrcUrl.replace( // replace part of a string
-            "http://mars.jpl.nasa.gov",
-            "https://mars.nasa.gov"
-        )
-
     Box(
         modifier = Modifier
             .padding(4.dp)
@@ -117,7 +107,7 @@ private fun MarsPhotoGridLayout(
     ) {
         Image(
             painter = rememberImagePainter(
-                data = redirectedImgSrcUrl,
+                data = redirectedImgSrcUrl(property.imgSrcUrl),
                 builder = {
                     placeholder(R.drawable.loading_animation)
                     error(R.drawable.ic_broken_image)

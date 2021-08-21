@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.example.retrifitbasics.MarsViewModel
+import com.example.retrifitbasics.redirectedImgSrcUrl
 import java.text.NumberFormat
 import java.util.*
 
@@ -40,16 +41,6 @@ fun DetailsScreen(
         ?.replace("buy", "Sell")
         ?.replace("rent", "Rent")
 
-    // TODO: Implement the URL redirection in the view model
-
-    // URL of the image at the endpoint is getting redirected,
-    // so fixed the URL before showing the image. Otherwise, mo image is shown.
-    val redirectedImgSrcUrl =
-        property?.imgSrcUrl?.replace( // replace part of a string
-            "http://mars.jpl.nasa.gov",
-            "https://mars.nasa.gov"
-        )
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -57,7 +48,7 @@ fun DetailsScreen(
     ) {
 
         Image(
-            painter = rememberImagePainter(data = redirectedImgSrcUrl),
+            painter = rememberImagePainter(data = property?.let { redirectedImgSrcUrl(it.imgSrcUrl) }),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
