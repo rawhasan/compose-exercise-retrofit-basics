@@ -37,7 +37,7 @@ fun DetailsScreen(
     val formattedPrice = format.format(property?.price)
 
     // get color from hex code
-    val marsColor = Color(android.graphics.Color.parseColor("#9a7d55"))
+    val marsColor = Color(android.graphics.Color.parseColor("#9a7d55")) // color from hex
 
     val propertyType = property?.type
         ?.replace("buy", "Sell")
